@@ -36,7 +36,7 @@ Sur la Raspberry Pi, les tâches peuvent être divisées en trois composantes pr
 3. **Un champ pour afficher la valeur de la lumière :** Montre les lectures du capteur de photorésistance, représentant la luminosité ambiante.
 4. **Un interrupteur :** Permet d'allumer ou d'éteindre la LED connectée à l'ESP32.
 
-    <img src="https://hackmd.io/_uploads/S1Jp9vH70.jpg" width="300">
+    <img src="IMG/2.png" width="300">
 
 
 Le code est composé de deux parties principales : un fichier HTML intégré dans un script Python **main.py** et un script pour traiter les actions de l'utilisateur **led.py**.
@@ -67,7 +67,7 @@ Le client MQTT côté Raspberry Pi agit comme un intermédiaire pour récupérer
 
 
 <center>
-<img src="https://hackmd.io/_uploads/HkZebpImA.png" width="500">
+<img src="IMG/3.png" width="500">
 </center>
 
 1. **Subscriber:** Cette partie est définie dans le fichier main.py. Elle permet au client de s'abonner aux topics MQTT "ESP/PhotoR" et "ESP/Bouton" afin de recevoir les messages envoyés par l'ESP32. Ces messages contiennent les valeurs de la photorésistance et de l'état du bouton.
@@ -128,7 +128,7 @@ L'ESP32 sert d'interface entre les capteurs et les actionneurs. En utilisant le 
     client.subscribe("ESP/Led");
     client.subscribe("ESP/Oled");
     ```
-![ESP32](https://hackmd.io/_uploads/BkcJTLJX0.png)
+![ESP32](IMG/4.png)
 
 3. La fonction **callback** est appelée chaque fois qu'un message est reçu sur un topic auquel l'ESP32 est abonné. Elle imprime d'abord le topic et le message reçu sur le port série. Ensuite, elle compare le topic pour déterminer l'action à effectuer. Si le message provient du topic "**ESP/Led**", la fonction vérifie si le message est "ON" ou "OFF" et allume ou éteint la LED en conséquence. Si le message provient du topic "ESP/Oled", elle copie le message dans **mailbox1.message**, met à jour l'état de la mailbox à "FULL", pour que ensuite le message sera affiché sur l'écran OLED. L'affichage de ce dernier est pris en charge par la fonction **loop_oled()**, qui se contente d'afficher les messages écrits dans la **mailbox1** périodiquement.
 
@@ -151,7 +151,7 @@ L'ESP32 sert d'interface entre les capteurs et les actionneurs. En utilisant le 
     ```
 <center>  
     
-![Capture d’écran du 2024-05-19 11-42-25](https://hackmd.io/_uploads/SyR2YBwQC.png)
+![Capture d’écran du 2024-05-19 11-42-25](IMG/5.png)
 </center>center>
 
 # Conclusion:
@@ -159,6 +159,6 @@ Notre travail est un prototype minimal mais fonctionnel qui peut être développ
 
 <center>    
 <a href="[lien_de_la_source](https://www.batirama.com/article/34062-la-montee-en-puissance-de-la-domotique.html)" target="_blank">
-<img src="https://hackmd.io/_uploads/r1Gy0HP7C.jpg" width="500">
+<img src="IMG/6.png" width="500">
 </a>
 </center>
