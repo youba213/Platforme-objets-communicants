@@ -1,11 +1,9 @@
-
-
 # Compte rendu Mini Projet IOC
 
 Youba FERHOUNE 
 Drifa AMIRI
 
-## 🔗 Lien vers la vidéo démonstrative : [https://drive.google.com/file/d/12ZOMyy7FxQDZ6HR5AiKONNsceRkdLXV2/view?usp=sharing](https://)
+
 ## Introduction
 
 Ce projet vise à créer un système qui permet de contrôler et de surveiller des capteurs et des actionneurs via une interface web. L'ESP32 est utilisé pour lire les données des capteurs (comme une photorésistance et un bouton poussoir) et contrôler des actionneurs (comme une LED et un écran OLED). La communication entre l'ESP32 et un serveur se fait via le protocole MQTT.
