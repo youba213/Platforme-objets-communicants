@@ -1,0 +1,32 @@
+#!/usr/bin/env python2.7
+
+import cgi, os, time,sys
+
+form = cgi.FieldStorage()
+val = form.getvalue('val')
+
+s2c_name = '/tmp/s2c_LG'
+
+s2c = open(s2c_name, 'w+')
+
+s2c.write("%s" % val)
+s2c.flush()
+
+s2c.close()
+
+html="""
+<head>
+<title>Peri web server</title>
+<META HTTP-EQUIV="Refresh" CONTENT="5; URL=/cgi-bin/main.py">
+</head>
+
+<body>
+LEDS:<br/>
+<form method="POST" action="led.py">
+<input name="val" cols="20"></input>
+<input type="submit" value="Entrer"></input>
+</form>
+</body>
+"""
+
+print html

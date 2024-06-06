@@ -1,0 +1,44 @@
+#!/usr/bin/env python2.7
+import select
+import sys
+
+c2s_ls_name = '/tmp/c2s_ls_LG'
+c2s_btn_name = '/tmp/c2s_btn_LG'
+
+c2s_ls = open(c2s_ls_name, 'r',0)
+c2s_btn = open(c2s_btn_name, 'r',0)
+
+r,_,_ = select.select([c2s_ls, c2s_btn], [], [], 0)
+
+btn_state = 0
+ls_value = 0
+
+if c2s_ls in r:
+        ls_value = c2s_ls.readline()
+elif c2s_btn in r:
+        btn_value = c2s_btn.readline()
+
+c2s_ls.close()
+c2s_btn.close()
+
+
+html="""
+<head>
+<title>Peri web server</title>
+<META HTTP-EQUIV="Refresh" CONTENT="5; URL=/cgi-bin/main.py">
+</head>
+
+<body>
+LEDS:<br/>
+<form method="POST" action="led.py">
+<input name="val" cols="20"></input>
+<input type="submit" value="Entrer"></input>
+</form>
+</br>
+%d
+</br>
+%d
+</body>
+""" % (ls_value, btn_state,)
+
+print html

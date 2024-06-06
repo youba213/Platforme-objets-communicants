@@ -1,7 +1,7 @@
 <html>
   <head><title>Peri web server</title></head>
-  <frameset rows="200,*" frameborder=0>
+  <frameset rows="100,*" frameborder=0>
     <frame src="img/peri.png">
     <frame src="cgi-bin/main.py">
-  </frameset>  
+  </frameset>
 </html>

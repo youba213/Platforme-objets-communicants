@@ -1,32 +1,44 @@
-#!/usr/bin/env python
-import cgi, os, time,sys
+#!/usr/bin/env python3
+import cgi
+import paho.mqtt.publish as publish
+
+# Fonction pour publier un message MQTT
+def publish_mqtt(topic, message):
+    publish.single(topic, message, hostname="172.20.10.12")
+
+# Récupérer la valeur du formulaire
 form = cgi.FieldStorage()
 val = form.getvalue('val')
+led_state = form.getvalue('led')
 
-s2fName = '/tmp/s2f_fw'
-f2sName = '/tmp/f2s_fw'
-s2f = open(s2fName,'w+')
-f2s = open(f2sName,'r',0)
+switch_state_file = '/tmp/switch_state.txt'
 
-s2f.write("w %s\n" % val)
-s2f.flush()
-res = f2s.readline()
-f2s.close()
-s2f.close()
+# Si une valeur est présente dans le formulaire, publier dans le topic correspondant
+if val is not None:
+    publish_mqtt("ESP/Oled", val)
 
-html="""
+# Gérer l'état du switch
+if led_state == "1":
+    publish_mqtt("ESP/Led", "ON")
+    with open(switch_state_file, 'w') as f:
+        f.write("1")
+else:
+    publish_mqtt("ESP/Led", "OFF")
+    with open(switch_state_file, 'w') as f:
+        f.write("0")
+
+# Rediriger vers la page principale pour éviter la resoumission du formulaire
+print("Content-Type: text/html")
+print()
+print("""
+<!DOCTYPE html>
+<html>
 <head>
   <title>Peri Web Server</title>
+ 
   <META HTTP-EQUIV="Refresh" CONTENT="1; URL=/cgi-bin/main.py">
 </head>
 <body>
-LEDS:<br/>
-<form method="POST" action="led.py">
-  <input name="val" cols="20"></input>
-  <input type="submit" value="Entrer">
-  set %s
-</form>
 </body>
-""" % (val,)
-
-print html
+</html>
+""")
