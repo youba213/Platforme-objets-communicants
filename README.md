@@ -7,7 +7,7 @@ Drifa AMIRI
 
 ## Introduction
 
-Ce projet a été devlopee dans le cadre de l'[EU IOC (Interface Objet Communicant)](https://largo.lip6.fr/trac/sesi-peri/wiki), il vise à créer un système qui permet de contrôler et de surveiller des capteurs et des actionneurs via une interface web. L'ESP32 est utilisé pour lire les données des capteurs (comme une photorésistance et un bouton poussoir) et contrôler des actionneurs (comme une LED et un écran OLED). La communication entre l'ESP32 et un serveur se fait via le protocole MQTT.
+Ce projet a été devlopé dans le cadre de l'[EU IOC (Interface Objet Communicant)](https://largo.lip6.fr/trac/sesi-peri/wiki), il vise à créer un système qui permet de contrôler et de surveiller des capteurs et des actionneurs via une interface web. L'ESP32 est utilisé pour lire les données des capteurs (comme une photorésistance et un bouton poussoir) et contrôler des actionneurs (comme une LED et un écran OLED). La communication entre l'ESP32 et un serveur se fait via le protocole MQTT.
 
 Le projet est divisé en deux parties principales : l'ESP32 et le serveur web. L'ESP32 publie les données des capteurs sur des topics MQTT et reçoit des commandes pour contrôler les actionneurs. Le serveur web offre une interface utilisateur pour afficher les données des capteurs et envoyer des commandes aux actionneurs. Cette interface est développée en HTML et CGI, et les commandes de l'utilisateur sont publiées sur les topics MQTT appropriés pour être traitées par l'ESP32.
 ![Capture d’écran du 2024-05-18 00-47-21](IMG/1.png)
